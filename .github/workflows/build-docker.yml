@@ -1,0 +1,23 @@
+name: Build and Publish Docker Image
+
+on:
+  push:
+    branches:
+      - main  # Or the branch you want to trigger the action on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Login to Docker Hub
+      run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+    
+    - name: Build Docker image
+      run: docker build -t your-dockerhub-username/your-image-name:latest .
+    
+    - name: Push Docker image to Docker Hub
+      run: docker push your-dockerhub-username/your-image-name:latest
