@@ -22,7 +22,22 @@ MVP for Showback / Chargeback of Vault Clients
 [If applicable, provide instructions for running the Jupyter Notebook. Explain how users can interact with it.]
 
 ### Running the Python Script
-[If applicable, provide instructions for running the Python script. Include command-line examples and options.]
+Requires the following environment variables:
+VAULT_TOKEN: A token with access to the following 
+path "sys/auth" {
+  capabilities = ["read"]
+}
+
+path "identity" {
+  capabilities = ["read"]
+}
+
+path "sys/internal/counters/activity/export" {
+  capabilities = ["read"]
+}
+
+VAULT_ADDR: Address of Vault Cluster
+
 
 ## Docker Image
 [Explain how users can use the Docker image you've created. Include a link to Docker Hub if applicable.]

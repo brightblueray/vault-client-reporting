@@ -1,0 +1,3 @@
+timestamp,date,namespace_id,auth_type,auth_path,name,non_entity,mount_accessor,client_id
+1677446143,2023-02-26 21:15:43,root,token,token/,Non-Entity,True,auth_token_02aa59c9,hLg1a3Y6NnyKJpMBfSb4aY+a6eQSM+oxJ18OCWPFb9U=
+1677696353,2023-03-01 18:45:53,root,github,github/,brightblueray,,auth_github_d77548a3,00f6d8b7-8be0-7afb-ef49-96799166d59b
