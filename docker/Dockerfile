@@ -1,17 +1,21 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+# Dockerfile
 
-# Set the working directory to /app
+# Use a base image with Python and Jupyter Notebook
+FROM jupyter/scipy-notebook:latest
+
+# Install additional Python packages
+RUN pip install requests pandas matplotlib
+
+# Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy your script and notebook into the container
+COPY src/client-report.py .
+COPY notebooks/Vault_Client_Audit.ipynb .
 
-# Install any needed packages
-RUN pip install --no-cache-dir requests pandas matplotlib jupyter
+# Set environment variables (optional)
+ENV VAULT_ADDR="http://host.docker.internal:8200"
+ENV VAULT_TOKEN="hvs.CAESIPA6tTKqzn_UiXnRRmstt7nuhJYadG_ed7itSZbBo-pyGh4KHGh2cy54MTlhZmt0cGFnOHF0bjBCQVRVdVhFcHE"
 
-# Make port 8888 available to the world outside this container
-EXPOSE 8888
-
-# Run jupyter when the container launches
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+# Command to run Jupyter Notebook
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]

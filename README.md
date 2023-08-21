@@ -23,7 +23,8 @@ MVP for Showback / Chargeback of Vault Clients
 
 ### Running the Python Script
 Requires the following environment variables:
-VAULT_TOKEN: A token with access to the following 
+- VAULT_TOKEN: A token with access to the following 
+```hcl
 path "sys/auth" {
   capabilities = ["read"]
 }
@@ -35,12 +36,22 @@ path "identity" {
 path "sys/internal/counters/activity/export" {
   capabilities = ["read"]
 }
+```
 
 VAULT_ADDR: Address of Vault Cluster
 
 
 ## Docker Image
-[Explain how users can use the Docker image you've created. Include a link to Docker Hub if applicable.]
+### Build
+While in the root directory of the repo
+```zsh
+docker build -t vault-client-reporter . --file docker/Dockerfile
+```
+
+### Run
+```zsh
+docker run -p 8888:8888 vault-client-reporter    
+```
 
 ## Contributing
 [Explain how others can contribute to your project. Include guidelines for submitting issues and pull requests.]
