@@ -45,11 +45,16 @@ for line in lines:
         data = json.loads(line)
         timestamp = data.get('timestamp', 0)
         human_ts = datetime.datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-        # print (human_ts)
-        # data['timestamp'] = human_ts
         data['date'] = human_ts
-        data['auth_type'] = auth_lookup[data.get('mount_accessor')]['type']
-        data['auth_path'] = auth_lookup[data.get('mount_accessor')]['path']
+
+        mount_accessor = data.get('mount_accessor')
+        if mount_accessor in auth_lookup:
+            data['auth_type'] = auth_lookup[mount_accessor]['type']
+            data['auth_path'] = auth_lookup[mount_accessor]['path']
+        else:
+            data['auth_type'] = 'unknown'
+            data['auth_path'] = 'unknown'
+
         client_data.append(data)
     except json.JSONDecodeError as e:
         print (f"Error decoding JSON: {e}")
